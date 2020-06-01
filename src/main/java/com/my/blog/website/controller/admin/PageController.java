@@ -46,11 +46,22 @@ public class PageController extends BaseController {
         return "admin/page_list";
     }
 
+    /**
+     * 跳转编辑页面
+     * @param request
+     * @return
+     */
     @GetMapping(value = "new")
     public String newPage(HttpServletRequest request) {
         return "admin/page_edit";
     }
 
+    /**
+     * 编辑页面
+     * @param cid
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/{cid}")
     public String editPage(@PathVariable String cid, HttpServletRequest request) {
         ContentVo contents = contentsService.getContents(cid);
@@ -71,10 +82,12 @@ public class PageController extends BaseController {
         contents.setContent(content);
         contents.setStatus(status);
         contents.setSlug(slug);
+    /*    contents.setAllowComment(true);*/
         contents.setType(Types.PAGE.getType());
-        if (null != allowComment) {
+        contents.setAllowComment(true);
+     /*   if (null != allowComment) {
             contents.setAllowComment(allowComment == 1);
-        }
+        }*/
         if (null != allowPing) {
             contents.setAllowPing(allowPing == 1);
         }

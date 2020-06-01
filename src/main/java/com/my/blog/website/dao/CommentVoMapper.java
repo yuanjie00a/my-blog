@@ -36,4 +36,5 @@ public interface CommentVoMapper {
     int updateByPrimaryKeyWithBLOBs(CommentVo record);
 
     int updateByPrimaryKey(CommentVo record);
+    List<CommentVo> findAllComment();
 }

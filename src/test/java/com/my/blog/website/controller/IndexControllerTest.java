@@ -1,5 +1,8 @@
 package com.my.blog.website.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.my.blog.website.modal.Vo.CommentVo;
+import com.my.blog.website.service.ISiteService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +34,16 @@ public class IndexControllerTest {
     @Ignore
     public void index() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("")).andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
+    @Autowired
+    private ISiteService iSiteService;
+    @Test
+    public  void test(){
+        PageInfo<CommentVo> commentVoPageInfo = iSiteService.recentComment(5);
+         for (CommentVo c:commentVoPageInfo.getList()){
+             System.out.println(c);
+       }
 
     }
 

@@ -1,5 +1,6 @@
 package com.my.blog.website.controller.admin;
 
+import com.github.pagehelper.PageInfo;
 import com.my.blog.website.service.ISiteService;
 import com.my.blog.website.constant.WebConst;
 import com.my.blog.website.controller.BaseController;
@@ -26,10 +27,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
 /**
- * 后台管理首页
- * Created by Administrator on 2017/3/9 009.
+        * @ProjectName: my-blog
+        * @Author: YuanJie
+        * @CreateDate: 2020-05-29 13:38
+        * @Description: 用户登录 和注销
  */
 @Controller("adminIndexController")
 @RequestMapping("/admin")
@@ -53,12 +55,14 @@ public class IndexController extends BaseController {
     @GetMapping(value = {"","/index"})
     public String index(HttpServletRequest request){
         LOGGER.info("Enter admin index method");
-        List<CommentVo> comments = siteService.recentComments(5);
+       /* List<CommentVo> comments = siteService.recentComments(5);*/
+        PageInfo<CommentVo> comments2 = siteService.recentComment(5);
+        List<CommentVo> comments = comments2.getList();
         List<ContentVo> contents = siteService.recentContents(5);
         StatisticsBo statistics = siteService.getStatistics();
         // 取最新的20条日志
         List<LogVo> logs = logService.getLogs(1, 5);
-
+        request.setAttribute("comments2",comments2);
         request.setAttribute("comments", comments);
         request.setAttribute("articles", contents);
         request.setAttribute("statistics", statistics);
@@ -87,7 +91,8 @@ public class IndexController extends BaseController {
 
 
     /**
-     * 保存个人信息
+     * 个人设置：保存个人信息
+     * a66abb5684c45962d887564f08346e8d
      */
     @PostMapping(value = "/profile")
     @ResponseBody
@@ -95,6 +100,7 @@ public class IndexController extends BaseController {
     public RestResponseBo saveProfile(@RequestParam String screenName, @RequestParam String email, HttpServletRequest request, HttpSession session) {
 
         UserVo users = this.user(request);
+        System.out.println("-------"+users);
         if (StringUtils.isNotBlank(screenName) && StringUtils.isNotBlank(email)) {
             UserVo temp = new UserVo();
             temp.setUid(users.getUid());
@@ -120,6 +126,7 @@ public class IndexController extends BaseController {
     @Transactional(rollbackFor = TipException.class)
     public RestResponseBo upPwd(@RequestParam String oldPassword, @RequestParam String password, HttpServletRequest request,HttpSession session) {
         UserVo users = this.user(request);
+        System.out.println("-------"+users);
         if (StringUtils.isBlank(oldPassword) || StringUtils.isBlank(password)) {
             return RestResponseBo.fail("请确认信息输入完整");
         }

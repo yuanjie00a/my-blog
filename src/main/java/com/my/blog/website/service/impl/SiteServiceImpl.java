@@ -1,6 +1,7 @@
 package com.my.blog.website.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.my.blog.website.dao.AttachVoMapper;
 import com.my.blog.website.dto.MetaDto;
 import com.my.blog.website.exception.TipException;
@@ -64,6 +65,14 @@ public class SiteServiceImpl implements ISiteService {
         LOGGER.debug("Exit recentComments method");
         return byPage;
     }
+
+    @Override
+    public PageInfo<CommentVo> recentComment(int limit) {
+        PageHelper.startPage(1,limit);
+        PageInfo pageInfo = new PageInfo(commentDao.findAllComment());
+        return pageInfo;
+    }
+
 
     @Override
     public List<ContentVo> recentContents(int limit) {

@@ -416,4 +416,7 @@
       parent = #{parent,jdbcType=INTEGER}
     where coid = #{coid,jdbcType=INTEGER}
   </update>
+  <select id="findAllComment" resultType="com.my.blog.website.modal.Vo.CommentVo">
+  SELECT * from t_comments order BY coid desc
+  </select>
 </mapper>

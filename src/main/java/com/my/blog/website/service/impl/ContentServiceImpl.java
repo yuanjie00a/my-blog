@@ -111,6 +111,7 @@ public class ContentServiceImpl implements IContentService {
     @Override
     public ContentVo getContents(String id) {
         if (StringUtils.isNotBlank(id)) {
+            //判断是否为纯数字
             if (Tools.isNumber(id)) {
                 ContentVo contentVo = contentDao.selectByPrimaryKey(Integer.valueOf(id));
                 if (contentVo != null) {

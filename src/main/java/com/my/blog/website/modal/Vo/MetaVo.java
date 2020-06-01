@@ -3,7 +3,10 @@ package com.my.blog.website.modal.Vo;
 import java.io.Serializable;
 
 /**
- * @author 
+ * @ProjectName: my-blog
+ * @Author: YuanJie
+ * @CreateDate: 2020-05-29 13:38
+ * @Description: 用户文字对象
  */
 public class MetaVo implements Serializable {
     /**

@@ -1,5 +1,6 @@
 package com.my.blog.website.service;
 
+import com.github.pagehelper.PageInfo;
 import com.my.blog.website.dto.MetaDto;
 import com.my.blog.website.modal.Bo.ArchiveBo;
 import com.my.blog.website.modal.Bo.BackResponseBo;
@@ -24,6 +25,8 @@ public interface ISiteService {
      * @return
      */
     List<CommentVo> recentComments(int limit);
+
+    public PageInfo<CommentVo> recentComment(int limit);
 
     /**
      * 最新发表的文章

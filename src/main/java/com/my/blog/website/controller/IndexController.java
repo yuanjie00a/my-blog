@@ -37,7 +37,7 @@ import java.util.List;
 
 /**
  * 首页
- * Created by Administrator on 2017/3/8 008.
+ * Created by Admin.
  */
 @Controller
 public class IndexController extends BaseController {
@@ -291,7 +291,7 @@ public class IndexController extends BaseController {
     }
 
     /**
-     * 自定义页面,如关于的页面
+     * 自定义页面,如关于的页面  预览页面
      */
     @GetMapping(value = "/{pagename}")
     public String page(@PathVariable String pagename, HttpServletRequest request) {
